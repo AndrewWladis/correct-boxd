@@ -19,6 +19,7 @@ export default function Home() {
   const [twoYearsAgo, setTwoYearsAgo] = useState<Movie[]>([]);
   const [threeYearsAgo, setThreeYearsAgo] = useState<Movie[]>([]);
   const [twentyNineteen, setTwentyNineteen] = useState<Movie[]>([]);
+  const [twentyEighteen, setTwentyEighteen] = useState<Movie[]>([]);
 
   useEffect(() => {
     fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2023')
@@ -49,6 +50,12 @@ export default function Home() {
       .then(response => response.json())
       .then(data => {
         setTwentyNineteen(data);
+      })
+      .catch(error => console.error(error));
+    fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2018')
+      .then(response => response.json())
+      .then(data => {
+        setTwentyEighteen(data);
       })
       .catch(error => console.error(error));
   }, [])
@@ -83,6 +90,12 @@ export default function Home() {
       <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2019 Movies</p>
       <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
         {(twentyNineteen.length !== 0) ? twentyNineteen.sort((a, b) => b.score - a.score).map((item) => (
+          <MovieItem info={item} key={item._id} />
+        )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
+      </div>
+      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2018 Movies</p>
+      <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
+        {(twentyEighteen.length !== 0) ? twentyEighteen.sort((a, b) => b.score - a.score).map((item) => (
           <MovieItem info={item} key={item._id} />
         )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
       </div>
