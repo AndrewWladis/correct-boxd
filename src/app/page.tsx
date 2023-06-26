@@ -20,6 +20,7 @@ export default function Home() {
   const [threeYearsAgo, setThreeYearsAgo] = useState<Movie[]>([]);
   const [twentyNineteen, setTwentyNineteen] = useState<Movie[]>([]);
   const [twentyEighteen, setTwentyEighteen] = useState<Movie[]>([]);
+  const [twentySeventeen, setTwentySeventeen] = useState<Movie[]>([]);
 
   useEffect(() => {
     fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2023')
@@ -58,47 +59,27 @@ export default function Home() {
         setTwentyEighteen(data);
       })
       .catch(error => console.error(error));
+    fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2017')
+      .then(response => response.json())
+      .then(data => {
+        setTwentySeventeen(data);
+      })
+      .catch(error => console.error(error));
   }, [])
 
   return (
     <main className="w-full m-0 p-0 h-screen bg-zinc-800 overflow-x-hidden">
       <Nav />
-      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">Recent Releases</p>
-      <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
-        {(recentReleases.length !== 0) ? recentReleases.sort((a, b) => b.score - a.score).map((item) => (
-          <MovieItem info={item} key={item._id} />
-        )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
-      </div>
-      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2022 Movies</p>
-      <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
-        {(lastYear.length !== 0) ? lastYear.sort((a, b) => b.score - a.score).map((item) => (
-          <MovieItem info={item} key={item._id} />
-        )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
-      </div>
-      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2021 Movies</p>
-      <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
-        {(twoYearsAgo.length !== 0) ? twoYearsAgo.sort((a, b) => b.score - a.score).map((item) => (
-          <MovieItem info={item} key={item._id} />
-        )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
-      </div>
-      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2020 Movies</p>
-      <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
-        {(threeYearsAgo.length !== 0) ? threeYearsAgo.sort((a, b) => b.score - a.score).map((item) => (
-          <MovieItem info={item} key={item._id} />
-        )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
-      </div>
-      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2019 Movies</p>
-      <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
-        {(twentyNineteen.length !== 0) ? twentyNineteen.sort((a, b) => b.score - a.score).map((item) => (
-          <MovieItem info={item} key={item._id} />
-        )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
-      </div>
-      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2018 Movies</p>
-      <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
-        {(twentyEighteen.length !== 0) ? twentyEighteen.sort((a, b) => b.score - a.score).map((item) => (
-          <MovieItem info={item} key={item._id} />
-        )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
-      </div>
+      {[[2023, recentReleases], [2022, lastYear], [2021, twoYearsAgo], [2020, threeYearsAgo], [2019, twentyNineteen], [2018, twentyEighteen], [2017, twentySeventeen]].map((item) => (
+        <>
+          <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">{item[0]} Movies</p>
+          <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
+            {(item[1].length !== 0) ? item[1].sort((a: Movie, b: Movie) => b.score - a.score).map((item: Movie) => (
+              <MovieItem info={item} key={item._id} />
+            )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
+          </div>
+        </>
+      ))}
     </main>
   )
 }

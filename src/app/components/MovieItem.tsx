@@ -36,7 +36,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ info }) => {
     <a href={`/movie/${info._id}`}>
       <div className="bg-zinc-900 rounded-2xl grid grid-cols-2 h-64 m-1" style={{ minWidth: 350, minHeight: 256, maxWidth: 350, maxHeight: 256 }}>
       <div className="w-full h-full flex justify-center items-center">
-        <Image loader={() => info.poster} src={info.poster} alt={info.title} width={164} height={230} style={{maxHeight: 230, minHeight: 230}} className="rounded-2xl object-cover" />
+        <Image loader={() => info.poster} loading="lazy" src={info.poster} alt={info.title} width={164} height={230} style={{maxHeight: 230, minHeight: 230}} className="rounded-2xl object-cover" />
       </div>
       <div className="h-full w-full p-2">
         <p className="font-sans font-bold text-xl text-zinc-200">{info.title}</p>

@@ -33,9 +33,9 @@ function calculateAverage(numbers: number[]): String {
 
 function chooseColor(num: number) {
   let color;
-  if (num < 5.9) {
+  if (num < 6.2) {
     color = '#ef4444'
-  } else if (num < 8.3) {
+  } else if (num < 8.6) {
     color = '#ca8a04'
   } else {
     color = '#22c55e'
