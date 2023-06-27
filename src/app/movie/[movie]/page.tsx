@@ -120,7 +120,7 @@ export default function Home() {
               height: 250,
               width: '100%',
               opacity: 0.5
-            }} className="object-cover w-full bg-no-repeat bg-cover flex justify-center items-center bg-center">
+            }} className="object-cover w-full bg-no-repeat bg-cover flex justify-center items-center bg-top">
               <p className='text-4xl font-bold text-white text-center z-10 p-1'>{info.title.toUpperCase()}</p>
             </div>
             <div style={{ backgroundColor: chooseColor(info.score) }} className="w-11/12 self-center m-3 rounded-full h-14 flex flex-row justify-center items-center">

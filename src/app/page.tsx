@@ -13,8 +13,34 @@ interface Movie {
   _id: string;
   reviews: number[];
 }
+
+interface CarouselItem {
+  text: string;
+  image: string;
+  link: string;
+}
+
+
 type MovieArray = [number, Movie];
 export default function Home() {
+  const CarouselItems = [
+    {
+      text: "Highest Rated Movies",
+      image: "https://pyxis.nymag.com/v1/imgs/c45/f1c/57e73c4fa6a055af7789e65f0c2f3fd17a-the-social-network.2x.rsocial.w600.jpg",
+      link: "/highest-rated"
+    },
+    {
+      text: "Recent Release: The Flash",
+      image: "https://variety.com/wp-content/uploads/2023/06/The-Flash-7.jpg?w=1000",
+      link: "/movie/649077c9cf36f87fd6bf8b0a"
+    },
+    {
+      text: "Recent Release: Spider-Man: Across the Spider-Verse",
+      image: "https://static01.nyt.com/images/2023/06/04/multimedia/04spider-man-mood-board-01-mczh/04spider-man-mood-board-01-mczh-superJumbo.jpg",
+      link: "/movie/6490796acf36f87fd6bf8b12"
+    }
+  ]
+  const [carouselIndex, setCarouselIndex] = useState(0);
   const [recentReleases, setRecentReleases] = useState<Movie[]>([]);
   const [lastYear, setLastYear] = useState<Movie[]>([]);
   const [twoYearsAgo, setTwoYearsAgo] = useState<Movie[]>([]);
@@ -68,14 +94,38 @@ export default function Home() {
       .catch(error => console.error(error));
   }, [])
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCarouselIndex(carouselIndex + 1)
+      if (carouselIndex === 3) {
+        setCarouselIndex(0)
+      }
+    }, 5000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <main className="w-full m-0 p-0 h-screen bg-zinc-800 overflow-x-hidden">
       <Nav />
-      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">Recent Releases</p>
+      <a href={CarouselItems[carouselIndex].link}>
+      <div style={{
+        backgroundImage: `url(${CarouselItems[carouselIndex].image})`,
+        height: 350,
+        width: '100%',
+        opacity: 0.5
+      }} className="object-cover w-full bg-no-repeat bg-cover flex justify-center items-center bg-center">
+        <p className='text-4xl font-black text-white text-center z-10 p-1'>{CarouselItems[carouselIndex].text.toUpperCase()}</p>
+      </div>
+      </a>
+      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2023 Movies</p>
       <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
         {(recentReleases.length !== 0) ? recentReleases.sort((a: Movie, b: Movie) => b.score - a.score).map((item: Movie) => (
           <MovieItem info={item} key={item._id} />
         )) : <>
+          <LoadingItem />
           <LoadingItem />
           <LoadingItem />
           <LoadingItem />
@@ -89,6 +139,7 @@ export default function Home() {
           <LoadingItem />
           <LoadingItem />
           <LoadingItem />
+          <LoadingItem />
         </>}
       </div>
       <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2021 Movies</p>
@@ -96,6 +147,7 @@ export default function Home() {
         {(twoYearsAgo.length !== 0) ? twoYearsAgo.sort((a: Movie, b: Movie) => b.score - a.score).map((item: Movie) => (
           <MovieItem info={item} key={item._id} />
         )) : <>
+          <LoadingItem />
           <LoadingItem />
           <LoadingItem />
           <LoadingItem />
@@ -109,6 +161,7 @@ export default function Home() {
           <LoadingItem />
           <LoadingItem />
           <LoadingItem />
+          <LoadingItem />
         </>}
       </div>
       <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2019 Movies</p>
@@ -116,6 +169,7 @@ export default function Home() {
         {(twentyNineteen.length !== 0) ? twentyNineteen.sort((a: Movie, b: Movie) => b.score - a.score).map((item: Movie) => (
           <MovieItem info={item} key={item._id} />
         )) : <>
+          <LoadingItem />
           <LoadingItem />
           <LoadingItem />
           <LoadingItem />
@@ -129,6 +183,7 @@ export default function Home() {
           <LoadingItem />
           <LoadingItem />
           <LoadingItem />
+          <LoadingItem />
         </>}
       </div>
       <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2017 Movies</p>
@@ -136,6 +191,7 @@ export default function Home() {
         {(twentySeventeen.length !== 0) ? twentySeventeen.sort((a: Movie, b: Movie) => b.score - a.score).map((item: Movie) => (
           <MovieItem info={item} key={item._id} />
         )) : <>
+          <LoadingItem />
           <LoadingItem />
           <LoadingItem />
           <LoadingItem />
