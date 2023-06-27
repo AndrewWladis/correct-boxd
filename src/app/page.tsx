@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <main className="w-full m-0 p-0 h-screen bg-zinc-800 overflow-x-hidden">
       <Nav />
-      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">2023 Movies</p>
+      <p className="font-sans font-bold text-3xl text-zinc-300 px-3 py-2">Recent Releases</p>
       <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
         {(recentReleases.length !== 0) ? recentReleases.sort((a: Movie, b: Movie) => b.score - a.score).map((item: Movie) => (
           <MovieItem info={item} key={item._id} />
