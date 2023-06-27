@@ -3,6 +3,7 @@ import Nav from './components/Nav'
 import MovieItem from './components/MovieItem'
 import { useEffect, useState } from 'react'
 import { BeatLoader } from 'react-spinners';
+import LoadingItem from './components/LoadingItem';
 
 interface Movie {
   title: string;
@@ -76,7 +77,11 @@ export default function Home() {
           <div className="!overflow-x-scroll flex flex-row min-w-0 pb-5">
             {(item[1].length !== 0) ? item[1].sort((a: Movie, b: Movie) => b.score - a.score).map((item: Movie) => (
               <MovieItem info={item} key={item._id} />
-            )) : <BeatLoader size="20px" color="#cbd5e1" className="pl-10 ml-10 pt-5 mt-5" />}
+            )) : <>
+              <LoadingItem />
+              <LoadingItem />
+              <LoadingItem />
+            </>}
           </div>
         </>
       ))}

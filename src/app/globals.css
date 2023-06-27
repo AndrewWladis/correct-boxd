@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes bg-change {
+    0%   {background-color: #a1a1aa;}
+    50%  {background-color: #4b5563;}
+    100% {background-color: #a1a1aa;}
+}
+
+.bg-change {
+    animation: bg-change 5s infinite;
+}
