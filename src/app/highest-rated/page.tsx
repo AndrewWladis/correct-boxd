@@ -29,7 +29,7 @@ export default function Home() {
     <main className="w-full m-0 p-0 h-screen bg-zinc-800 overflow-x-hidden">
       <Nav />
       <div className="w-full h-fit flex flex-wrap flex-row justify-center">
-        {(movies.length !== 0) ? movies.sort((a, b) => b.score - a.score).map((item) => (
+        {(movies.length !== 0) ? movies.sort((a, b) => b.year - a.year).sort((a, b) => b.score - a.score).map((item) => (
           <MovieItem info={item} key={item._id} />
         )) : <BeatLoader size="20px" color="#cbd5e1" className="pt-10 mt-10" />}
       </div>
