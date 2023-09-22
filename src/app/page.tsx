@@ -33,11 +33,6 @@ export default function Home() {
       text: "Recent Release: Blue Beetle",
       image: "https://variety.com/wp-content/uploads/2023/08/blue-beetle-film.jpg",
       link: "/movie/64f211fd93d2872c55a2ddbf"
-    },
-    {
-      text: "Recent Release: Spider-Man: Across the Spider-Verse",
-      image: "https://static01.nyt.com/images/2023/06/04/multimedia/04spider-man-mood-board-01-mczh/04spider-man-mood-board-01-mczh-superJumbo.jpg",
-      link: "/movie/6490796acf36f87fd6bf8b12"
     }
   ]
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -50,43 +45,43 @@ export default function Home() {
   const [twentySeventeen, setTwentySeventeen] = useState<Movie[]>([]);
 
   useEffect(() => {
-    fetch('https://correct-boxd.cyclic.cloud/movies-by-year/2023')
+    fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2023')
       .then(response => response.json())
       .then(data => {
         setRecentReleases(data);
       })
       .catch(error => console.error(error));
-    fetch('https://correct-boxd.cyclic.cloud/movies-by-year/2022')
+    fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2022')
       .then(response => response.json())
       .then(data => {
         setLastYear(data);
       })
       .catch(error => console.error(error));
-    fetch('https://correct-boxd.cyclic.cloud/movies-by-year/2021')
+    fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2021')
       .then(response => response.json())
       .then(data => {
         setTwoYearsAgo(data);
       })
       .catch(error => console.error(error));
-    fetch('https://correct-boxd.cyclic.cloud/movies-by-year/2020')
+    fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2020')
       .then(response => response.json())
       .then(data => {
         setThreeYearsAgo(data);
       })
       .catch(error => console.error(error));
-    fetch('https://correct-boxd.cyclic.cloud/movies-by-year/2019')
+    fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2019')
       .then(response => response.json())
       .then(data => {
         setTwentyNineteen(data);
       })
       .catch(error => console.error(error));
-    fetch('https://correct-boxd.cyclic.cloud/movies-by-year/2018')
+    fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2018')
       .then(response => response.json())
       .then(data => {
         setTwentyEighteen(data);
       })
       .catch(error => console.error(error));
-    fetch('https://correct-boxd.cyclic.cloud/movies-by-year/2017')
+    fetch('https://correct-boxd-backend.onrender.com/movies-by-year/2017')
       .then(response => response.json())
       .then(data => {
         setTwentySeventeen(data);

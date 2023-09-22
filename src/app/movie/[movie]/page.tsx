@@ -80,7 +80,7 @@ export default function Home() {
 
   async function makeRatingReq() {
     setIsBoxLoading(true)
-    fetch(`https://correct-boxd.cyclic.cloud/movies/${info._id}/reviews`, {
+    fetch(`https://correct-boxd-backend.onrender.com/movies/${info._id}/reviews`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
