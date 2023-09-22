@@ -17,7 +17,7 @@ export default function Home() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    fetch('https://correct-boxd-backend.onrender.com/highest-rated')
+    fetch('https://correct-boxd.cyclic.cloud/highest-rated')
       .then(response => response.json())
       .then(data => {
         setMovies(data);
